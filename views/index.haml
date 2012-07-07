@@ -1,0 +1,73 @@
+!!!
+%html
+  %head
+    %title SAT Lunch
+    %meta(http-equiv="Content-Type" content="text/html; charset=iso-8859-1")
+    %link(rel="stylesheet" type="text/css" href="css/style.css")
+    %script{:type => 'text/javascript', :src=>'js/form_status_adjuster.js'}
+
+  %body
+    #wrap-out
+      #wrap
+        #header
+          %h1#logo-text SAT Lunch
+          %p#intro 
+            Please input by 11:30
+            %br 
+            If you chose curry as dish, you can't choose rice.
+        #content-wrap
+          #main
+            %h2 Order
+            %table
+              %tr
+                %th Name
+                %th Attendance
+                %th Dish
+                %th Rice
+                %th Date
+                %th comment
+              - @orders.each do |order|
+                %tr
+                  %td= h(order.name)
+                  %td= h(order.attendance)
+                  %td=  h(order.dish)
+                  %td= h(order.rice)
+                  %td= h(order.date)
+                  %td= h(order.comment)
+            %h2 Order Form
+            %p Please input the menu which you want to eat.
+            %form{:name=>"order", :action=>"/order", :method=>"post"}
+              %input{:type => "hidden", :name => "_method", :value => "PUT"}
+              %p
+                %label Name
+                %input{:type=>"text", :name=>"name", :size=>"30"} 
+                %label Attendance
+                %input{:type=>"radio", :name=>"attendance", :value=>"yes", :onclick=>"set_attendance()", :checked=>true} Yes
+                %input{:type=>"radio", :name=>"attendance", :value=>"no", :onclick=>"set_attendance()"} No
+                %label Accompanying Dish
+                %select{:name=>"dish", :onchange=>"change_rice_options()"}
+                  %option meat
+                  %option fish
+                  %option combo
+                  %option curry
+                  %option -
+                %label Rice
+                %select{:name=>"rice"}
+                  %option white rice
+                  %option wild vegetable rice
+                  %option red rice
+                  %option special rice
+                  %option -
+                %label Your Comments
+                %textarea{:name=>"comment", :cols=>"5", :rows=>"5"}
+                %br
+                %input{:class=>"button", :type=>"submit", :value=>"Send"}
+                %input{:class=>"button", :type=>"reset", :value=>"Reset"}
+                %br 
+          #sidebar
+            %h3 Links
+            %ul.sidemenu
+              %li<
+                %a(href="http://rakuten.co.jp") Rakuten
+        #footer-wrap
+          %p Copyright (C) 2012 SAT 11 new grads. All Rights Reserved.

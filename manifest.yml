@@ -1,0 +1,16 @@
+--- 
+applications: 
+  .: 
+    name: demo-sat-lunch
+    instances: 1
+    framework: 
+      name: sinatra
+      info: 
+        exec: ruby sat-lunch.rb
+        description: Sinatra Application
+        mem: 128M
+    url: ${name}.${target-base}
+    services: 
+      sat-lunch: 
+        type: mysql
+    mem: 128M
