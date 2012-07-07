@@ -1,7 +1,7 @@
 --- 
 applications: 
   .: 
-    name: demo-sat-lunch
+    name: sat-lunch
     instances: 1
     framework: 
       name: sinatra
