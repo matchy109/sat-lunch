@@ -25,7 +25,8 @@
                 %th Dish
                 %th Rice
                 %th Date
-                %th comment
+                %th Comment
+                %th Delete
               - @orders.each do |order|
                 %tr
                   %td= h(order.name)
@@ -34,10 +35,14 @@
                   %td= h(order.rice)
                   %td= h(order.date)
                   %td= h(order.comment)
+                  %td
+                    %form{:method => "post", :action => "/order/#{order.id}"}
+                      %input{:type => "hidden", :name => "_method", :value => "delete"}
+                      %input{:type => "submit", :value => "delete"}
             %h2 Order Form
             %p Please input the menu which you want to eat.
             %form{:name=>"order", :action=>"/order", :method=>"post"}
-              %input{:type => "hidden", :name => "_method", :value => "PUT"}
+              %input{:type => "hidden", :name => "_method", :value => "put"}
               %p
                 %label Name
                 %input{:type=>"text", :name=>"name", :size=>"30"} 

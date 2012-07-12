@@ -50,6 +50,11 @@ put '/order' do
   redirect '/'
 end
 
+delete '/order/:id' do
+    Orders.filter('id = ?', params[:id]).delete
+    redirect '/'
+end
+
 #not_found do
  # 'ファイルが存在しません'
 #end
